@@ -31,3 +31,9 @@ class ProjectLink(models.Model):
     icon = models.ImageField(upload_to='project_link_icons/', max_length=256)
     link = models.CharField(256)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
+
+
+class ProjectArticle(models.Model):
+    title = models.CharField(32)
+    text = models.TextField()
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
