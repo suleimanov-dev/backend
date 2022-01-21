@@ -47,3 +47,13 @@ class Technology(models.Model):
 class ProjectTechnology(models.Model):
     technology = models.ForeignKey(Technology, on_delete=models.RESTRICT)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
+
+
+class Instrument(models.Model):
+    name = models.CharField(32)
+    icon = models.ImageField(upload_to='instrument_icons/', max_length=256)
+
+
+class ProjectInstrument(models.Model):
+    technology = models.ForeignKey(Instrument, on_delete=models.RESTRICT)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
