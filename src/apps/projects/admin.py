@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from src.apps.projects.models import (
+from .models import (
     Project, ProjectLink, ProjectArticle, Technology, ProjectTechnology, Instrument,
     ProjectInstrument,
 )
