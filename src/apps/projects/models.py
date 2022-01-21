@@ -37,3 +37,13 @@ class ProjectArticle(models.Model):
     title = models.CharField(32)
     text = models.TextField()
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
+
+
+class Technology(models.Model):
+    name = models.CharField(32)
+    icon = models.ImageField(upload_to='technology_icons/', max_length=256)
+
+
+class ProjectTechnology(models.Model):
+    technology = models.ForeignKey(Technology, on_delete=models.RESTRICT)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
