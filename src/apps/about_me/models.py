@@ -15,3 +15,13 @@ class MainInfo(SingletonModel):
         blank=True,
         null=True
     )
+
+
+class ContactLink(models.Model):
+    name = models.CharField(max_length=64)
+    icon = models.FileField(
+        upload_to='contact_link_icons/',
+        validators=[FileExtensionValidator(['svg'])],
+        max_length=256
+    )
+    link = models.CharField(max_length=256)
