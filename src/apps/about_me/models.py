@@ -1,25 +1,17 @@
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.validators import FileExtensionValidator
 from django.db import models
 
-
-class SingletonModel(models.Model):
-    class Meta:
-        abstract = True
-
-    def save(self, *args, **kwargs):
-        self.pk = 1
-        super(SingletonModel, self).save(*args, **kwargs)
-
-    def delete(self, *args, **kwargs):
-        pass
-
-    @classmethod
-    def load(cls):
-        try:
-            return cls.objects.get(pk=1)
-        except ObjectDoesNotExist:
-            return None
+from src.apps.common.models import SingletonModel
 
 
-class ResumeFile(SingletonModel):
-    file = models.FileField(upload_to='resume_files/', max_length=256)
+class MainInfo(SingletonModel):
+    name = models.CharField(max_length=64, default='John Doe')
+    job = models.CharField(max_length=64, default='meme-creator')
+    location = models.CharField(max_length=64, default='Los Santos, USA')
+    resume_file = models.FileField(
+        upload_to='resume_files/',
+        validators=[FileExtensionValidator(['pdf', 'doc'])],
+        max_length=256,
+        blank=True,
+        null=True
+    )

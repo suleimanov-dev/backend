@@ -27,20 +27,20 @@ class Project(models.Model):
 
 
 class ProjectLink(models.Model):
-    name = models.CharField(max_length=32)
+    name = models.CharField(max_length=64)
     icon = models.ImageField(upload_to='project_link_icons/', max_length=256)
     link = models.CharField(max_length=256)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
 
 class ProjectArticle(models.Model):
-    title = models.CharField(max_length=32)
+    title = models.CharField(max_length=64)
     text = models.TextField()
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
 
 class Technology(models.Model):
-    name = models.CharField(max_length=32)
+    name = models.CharField(max_length=64, unique=True)
     icon = models.ImageField(upload_to='technology_icons/', max_length=256)
 
 
@@ -50,7 +50,7 @@ class ProjectTechnology(models.Model):
 
 
 class Instrument(models.Model):
-    name = models.CharField(max_length=32)
+    name = models.CharField(max_length=64, unique=True)
     icon = models.ImageField(upload_to='instrument_icons/', max_length=256)
 
 
