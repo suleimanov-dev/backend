@@ -1,4 +1,9 @@
+from django.core.validators import FileExtensionValidator
 from django.db import models
+
+from .instrument import Instrument
+from .link import LinkType
+from .technology import Technology
 
 
 class Project(models.Model):
@@ -12,24 +17,23 @@ class Project(models.Model):
         study = 'STUDY', 'Study'
 
     name = models.CharField(max_length=64)
-    icon = models.ImageField(upload_to='project_icons/', max_length=256)
+    icon = models.ImageField(upload_to='icons/projects/', max_length=256)
     date_created = models.DateField()
-    involvement = models.CharField(
-        max_length=10,
-        choices=Involvement.choices
+    involvement = models.CharField(max_length=32, choices=Involvement.choices)
+    designation = models.CharField(max_length=32, choices=Designation.choices)
+    overview_video = models.FileField(
+        upload_to='files/overview_videos/',
+        validators=[FileExtensionValidator(['mp4'])],
+        max_length=256,
+        blank=True,
+        null=True
     )
-    designation = models.CharField(
-        max_length=10,
-        choices=Designation.choices
-    )
-    overview_video = models.FileField(upload_to='project_overview_videos/', max_length=256, blank=True, null=True)
     is_actual = models.BooleanField(default=False)
 
 
 class ProjectLink(models.Model):
-    name = models.CharField(max_length=64)
-    icon = models.ImageField(upload_to='project_link_icons/', max_length=256)
     link = models.CharField(max_length=256)
+    link_type = models.ForeignKey(LinkType, on_delete=models.RESTRICT)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
 
@@ -39,21 +43,11 @@ class ProjectArticle(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
 
-class Technology(models.Model):
-    name = models.CharField(max_length=64, unique=True)
-    icon = models.ImageField(upload_to='technology_icons/', max_length=256)
-
-
 class ProjectTechnology(models.Model):
     technology = models.ForeignKey(Technology, on_delete=models.RESTRICT)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
 
-class Instrument(models.Model):
-    name = models.CharField(max_length=64, unique=True)
-    icon = models.ImageField(upload_to='instrument_icons/', max_length=256)
-
-
 class ProjectInstrument(models.Model):
-    technology = models.ForeignKey(Instrument, on_delete=models.RESTRICT)
+    instrument = models.ForeignKey(Instrument, on_delete=models.RESTRICT)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)

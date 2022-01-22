@@ -1,12 +1,11 @@
 from django.core.validators import FileExtensionValidator
 from django.db import models
 
-from src.apps.common.models import SingletonModel
+from ..common.models import SingletonModel
 
 
 class MainInfo(SingletonModel):
     name = models.CharField(max_length=64, default='John Doe')
-    job = models.CharField(max_length=64, default='meme-creator')
     location = models.CharField(max_length=64, default='Los Santos, USA')
     resume_file = models.FileField(
         upload_to='resume_files/',
@@ -25,3 +24,4 @@ class ContactLink(models.Model):
         max_length=256
     )
     link = models.CharField(max_length=256)
+    priority_number = models.IntegerField(default=0)
