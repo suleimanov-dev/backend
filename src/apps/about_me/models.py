@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 
 
@@ -14,5 +15,11 @@ class SingletonModel(models.Model):
 
     @classmethod
     def load(cls):
-        obj, created = cls.objects.get_or_create(pk=1)
-        return obj
+        try:
+            return cls.objects.get(pk=1)
+        except ObjectDoesNotExist:
+            return None
+
+
+class ResumeFile(SingletonModel):
+    file = models.FileField(upload_to='resume_files/', max_length=256)
