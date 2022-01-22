@@ -22,7 +22,7 @@ class Project(models.Model):
     involvement = models.CharField(max_length=32, choices=Involvement.choices)
     designation = models.CharField(max_length=32, choices=Designation.choices)
     overview_video = models.FileField(
-        upload_to='files/overview_videos/',
+        upload_to='videos/overviews/',
         validators=[FileExtensionValidator(['mp4'])],
         max_length=256,
         blank=True,
@@ -32,7 +32,7 @@ class Project(models.Model):
 
 
 class ProjectLink(models.Model):
-    link = models.CharField(max_length=256)
+    link = models.URLField(max_length=256)
     link_type = models.ForeignKey(LinkType, on_delete=models.RESTRICT)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 

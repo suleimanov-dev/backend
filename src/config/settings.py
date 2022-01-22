@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # third-party apps
+    'tinymce',
     # Custom apps
     'apps.about_me',
     'apps.projects'
@@ -140,3 +142,11 @@ MEDIA_URL = 'uploads/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# TinyMCE configurations
+TINYMCE_DEFAULT_CONFIG = {
+    'menubar': '',
+    'plugins': 'autolink link',
+    'toolbar': 'link'
+}
