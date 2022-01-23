@@ -5,8 +5,8 @@ from ...helpers.models import SingletonModel
 
 
 class MainInfo(SingletonModel):
-    name = models.CharField(max_length=64, default='John Doe')
-    location = models.CharField(max_length=64, default='Los Santos, USA')
+    name = models.CharField(max_length=64, default='')
+    location = models.CharField(max_length=64, default='')
     portrait = models.ImageField(
         upload_to='images/portraits/',
         max_length=256,

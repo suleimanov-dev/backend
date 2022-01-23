@@ -21,6 +21,7 @@ class Project(models.Model):
     month_created = models.DateField()
     involvement = models.CharField(max_length=32, choices=Involvement.choices)
     designation = models.CharField(max_length=32, choices=Designation.choices)
+    short_description = models.TextField(max_length=512)
     overview_video = models.FileField(
         upload_to='videos/overviews/',
         validators=[FileExtensionValidator(['mp4'])],
@@ -39,7 +40,7 @@ class ProjectLink(models.Model):
 
 class ProjectArticle(models.Model):
     title = models.CharField(max_length=64)
-    text = models.TextField()
+    text = models.TextField(max_length=2048)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
 
