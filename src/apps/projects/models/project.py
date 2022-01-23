@@ -18,7 +18,7 @@ class Project(models.Model):
 
     name = models.CharField(max_length=64)
     icon = models.ImageField(upload_to='icons/projects/', max_length=256)
-    date_created = models.DateField()
+    month_created = models.DateField()
     involvement = models.CharField(max_length=32, choices=Involvement.choices)
     designation = models.CharField(max_length=32, choices=Designation.choices)
     overview_video = models.FileField(
