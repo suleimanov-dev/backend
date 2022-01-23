@@ -1,3 +1,4 @@
+import ordering as ordering
 from django.core.validators import FileExtensionValidator
 from django.db import models
 
@@ -30,6 +31,9 @@ class Project(models.Model):
         null=True
     )
     is_actual = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ('-month_created',)
 
 
 class ProjectLink(models.Model):
