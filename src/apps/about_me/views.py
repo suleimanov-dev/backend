@@ -12,10 +12,10 @@ class SerializedMainInfoView(views.View):
 
     @staticmethod
     def get(request, *args, **kwargs):  # noqa
-        data = get_serialized_data(MainInfo.load())
-        data['contact_links'] = get_serialized_data(ContactLink.objects.all())
-        data['technology_blocks'] = get_serialized_data(TechnologyBlock.objects.all())
-        return HttpResponse(json.dumps(data), content_type='application/json')
+        main_info_data = get_serialized_data(MainInfo.load())
+        main_info_data['contact_links'] = get_serialized_data(ContactLink.objects.all())
+        main_info_data['technology_blocks'] = get_serialized_data(TechnologyBlock.objects.all())
+        return HttpResponse(json.dumps(main_info_data), content_type='application/json')
 
 
 class SerializedTimelineView(views.View):
@@ -23,9 +23,9 @@ class SerializedTimelineView(views.View):
 
     @staticmethod
     def get(request, *args, **kwargs):  # noqa
-        data = get_serialized_data(TimelineElement.objects.all())
-        for timeline_el in data:
+        timeline_elements_data = get_serialized_data(TimelineElement.objects.all())
+        for timeline_el in timeline_elements_data:
             timeline_el['attachments'] = get_serialized_data(
                 TimelineElementAttachment.objects.filter(element=timeline_el['id'])
             )
-        return HttpResponse(json.dumps(data), content_type='application/json')
+        return HttpResponse(json.dumps(timeline_elements_data), content_type='application/json')

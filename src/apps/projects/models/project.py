@@ -1,4 +1,3 @@
-import ordering as ordering
 from django.core.validators import FileExtensionValidator
 from django.db import models
 
@@ -17,7 +16,7 @@ class Project(models.Model):
         personal = 'PERSONAL', 'Personal'
         study = 'STUDY', 'Study'
 
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=64, unique=True)
     icon = models.ImageField(upload_to='icons/projects/', max_length=256)
     month_created = models.DateField()
     involvement = models.CharField(max_length=32, choices=Involvement.choices)
@@ -43,7 +42,12 @@ class ProjectLink(models.Model):
 
 
 class ProjectArticle(models.Model):
-    title = models.CharField(max_length=64)
+    class Title(models.TextChoices):
+        description = 'DESCRIPTION', 'Description'
+        features = 'FEATURES', 'Features'
+        contribution = 'CONTRIBUTION', 'Contribution'
+
+    title = models.CharField(max_length=64, choices=Title.choices)
     text = models.TextField(max_length=2048)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
