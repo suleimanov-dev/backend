@@ -2,13 +2,11 @@ from django.contrib import admin
 
 from .models import (
     Project, ProjectLink, ProjectArticle, Technology, ProjectTechnology, Instrument,
-    ProjectInstrument, TechnologyPair, TechnologySubstitute, LinkType,
+    ProjectInstrument, LinkType,
 )
 
 # technology.py
 admin.site.register(Technology)
-admin.site.register(TechnologyPair)
-admin.site.register(TechnologySubstitute)
 
 # instrument.py
 admin.site.register(Instrument)
