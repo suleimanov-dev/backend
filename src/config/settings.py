@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-=(39)42t2y^ode9dz96&t1*-fp97asot3j14fph8pp1+en9n*p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # third-party apps
     'tinymce',
+    'corsheaders',
     # Custom apps
     'apps.about_me',
     'apps.projects'
@@ -55,6 +56,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -144,9 +146,12 @@ MEDIA_URL = 'uploads/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# TinyMCE configurations
+# TinyMCE
 TINYMCE_DEFAULT_CONFIG = {
     'menubar': '',
     'plugins': 'autolink link',
     'toolbar': 'link'
 }
+
+# CORS
+CORS_ALLOWED_ORIGINS = ['http://localhost:8080', 'http://127.0.0.1:8080']
