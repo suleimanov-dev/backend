@@ -29,7 +29,14 @@ class Project(models.Model):
         blank=True,
         null=True
     )
+    overview_video_preview = models.ImageField(
+        upload_to='images/overview_previews/',
+        max_length=256,
+        blank=True,
+        null=True
+    )
     is_actual = models.BooleanField(default=False)
+    is_shown = models.BooleanField(default=False)
 
     class Meta:
         ordering = ('-month_created',)
