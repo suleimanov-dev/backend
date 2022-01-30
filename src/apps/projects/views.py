@@ -21,8 +21,8 @@ class SerializedProjectFiltersView(views.View):
             'technologies': get_serialized_data(Technology.objects.all()),
             'instruments': get_serialized_data(Instrument.objects.all()),
             'time_period': {
-                'from': str(Project.objects.latest('-month_created').month_created),
-                'to': str(Project.objects.latest('month_created').month_created)
+                'from': str(Project.objects.filter(is_shown=True).latest('-month_created').month_created),
+                'to': str(Project.objects.filter(is_shown=True).latest('month_created').month_created)
             }
         }
         return HttpResponse(json.dumps(data), content_type='application/json')
@@ -33,7 +33,7 @@ class SerializedProjectsView(views.View):
 
     @staticmethod
     def get(request, *args, **kwargs):  # noqa
-        data = get_serialized_data(Project.objects.all())
+        data = get_serialized_data(Project.objects.filter(is_shown=True))
         for project in data:
             project['technologies'] = get_serialized_data(
                 [pt.technology for pt in ProjectTechnology.objects.filter(project=project['id']).all()]
@@ -50,7 +50,7 @@ class SerializedProjectView(views.View):
     @staticmethod
     def get(request, name, *args, **kwargs):  # noqa
         try:
-            project_data = get_serialized_data(Project.objects.get(name=name))
+            project_data = get_serialized_data(Project.objects.get(name=name, is_shown=True))
 
             project_links = ProjectLink.objects.filter(project=project_data['id']).select_related('link_type')
             project_data['links'] = []
