@@ -33,8 +33,8 @@ class SerializedProjectsView(views.View):
 
     @staticmethod
     def get(request, *args, **kwargs):  # noqa
-        data = {'projects': get_serialized_data(Project.objects.all())}
-        for project in data['projects']:
+        data = get_serialized_data(Project.objects.all())
+        for project in data:
             project['technologies'] = get_serialized_data(
                 [pt.technology for pt in ProjectTechnology.objects.filter(project=project['id']).all()]
             )
