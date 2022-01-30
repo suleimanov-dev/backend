@@ -19,7 +19,11 @@ class SerializedProjectFiltersView(views.View):
                 'designation': [pd[0] for pd in Project.Designation.choices]
             },
             'technologies': get_serialized_data(Technology.objects.all()),
-            'instruments': get_serialized_data(Instrument.objects.all())
+            'instruments': get_serialized_data(Instrument.objects.all()),
+            'time_period': {
+                'from': str(Project.objects.latest('-month_created').month_created),
+                'to': str(Project.objects.latest('month_created').month_created)
+            }
         }
         return HttpResponse(json.dumps(data), content_type='application/json')
 
@@ -37,10 +41,6 @@ class SerializedProjectsView(views.View):
             project['instruments'] = get_serialized_data(
                 [pi.instrument for pi in ProjectInstrument.objects.filter(project=project['id']).all()]
             )
-        data['filters_time_period'] = {
-            'from': str(Project.objects.latest('-month_created').month_created),
-            'to': str(Project.objects.latest('month_created').month_created)
-        }
         return HttpResponse(json.dumps(data), content_type='application/json')
 
 
