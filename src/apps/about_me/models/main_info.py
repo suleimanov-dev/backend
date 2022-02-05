@@ -1,6 +1,7 @@
 from django.core.validators import FileExtensionValidator
 from django.db import models
 
+from ..validators import validate_contact_link
 from ...helpers.models import SingletonModel
 
 
@@ -29,7 +30,7 @@ class ContactLink(models.Model):
         validators=[FileExtensionValidator(['svg'])],
         max_length=256
     )
-    link = models.URLField(max_length=256)
+    link = models.CharField(max_length=256, validators=[validate_contact_link])
     priority_number = models.IntegerField(default=0)
 
     class Meta:
