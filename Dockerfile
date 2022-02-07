@@ -4,7 +4,7 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /backend
 
-COPY poetry.lockm poetry.lock
+COPY poetry.lock poetry.lock
 COPY pyproject.toml pyproject.toml
 RUN pip install poetry==1.1.8
 RUN poetry config virtualenvs.create false
