@@ -20,18 +20,15 @@ from dotenv import load_dotenv, find_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+SECRET_KEY = os.environ.get('DB_NAME', 'dbname')
+
+
 # Loading environment variables
+
 load_dotenv(find_dotenv())
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=(39)42t2y^ode9dz96&t1*-fp97asot3j14fph8pp1+en9n*p'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Allowed hosts
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
 
@@ -89,13 +86,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.environ.get("DB_NAME", "dbname"),
-        "USER": os.environ.get("DB_USER", "dbuser"),
-        "PASSWORD": os.environ.get("DB_PASSWORD", "dbpassword"),
-        "HOST": os.environ.get("DB_HOST", "dbhost"),
-        "PORT": "5432",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('DB_NAME', 'dbname'),
+        'USER': os.environ.get('DB_USER', 'dbuser'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'dbpassword'),
+        'HOST': os.environ.get('DB_HOST', 'dbhost'),
+        'PORT': '5432',
     }
 }
 
@@ -147,6 +144,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # TinyMCE
+
 TINYMCE_DEFAULT_CONFIG = {
     'menubar': '',
     'plugins': 'autolink link',
@@ -154,4 +152,5 @@ TINYMCE_DEFAULT_CONFIG = {
 }
 
 # CORS
+
 CORS_ALLOWED_ORIGINS = ['http://localhost:8080', 'http://127.0.0.1:8080', 'http://127.0.0.1', 'http://0.0.0.0']
