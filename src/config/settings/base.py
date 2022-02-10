@@ -20,17 +20,9 @@ from dotenv import load_dotenv, find_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
-SECRET_KEY = os.environ.get('DB_NAME', 'dbname')
-
-
 # Loading environment variables
 
 load_dotenv(find_dotenv())
-
-
-# Allowed hosts
-
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
 
 
 # Application definition
@@ -150,7 +142,3 @@ TINYMCE_DEFAULT_CONFIG = {
     'plugins': 'autolink link',
     'toolbar': 'link'
 }
-
-# CORS
-
-CORS_ALLOWED_ORIGINS = ['http://localhost:8080', 'http://127.0.0.1:8080', 'http://127.0.0.1', 'http://0.0.0.0']
