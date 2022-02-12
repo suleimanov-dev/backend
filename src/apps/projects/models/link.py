@@ -9,3 +9,6 @@ class LinkType(models.Model):
         validators=[FileExtensionValidator(['svg'])],
         max_length=256
     )
+
+    def __str__(self):
+        return self.name

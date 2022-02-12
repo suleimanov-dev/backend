@@ -41,11 +41,17 @@ class Project(models.Model):
     class Meta:
         ordering = ('-month_created',)
 
+    def __str__(self):
+        return self.name
+
 
 class ProjectLink(models.Model):
     link = models.URLField(max_length=256)
     link_type = models.ForeignKey(LinkType, on_delete=models.RESTRICT)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.project} {self.link_type}'
 
 
 class ProjectArticle(models.Model):
@@ -58,12 +64,21 @@ class ProjectArticle(models.Model):
     text = models.TextField(max_length=2048)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f'{self.project} {self.title}'
+
 
 class ProjectTechnology(models.Model):
     technology = models.ForeignKey(Technology, on_delete=models.RESTRICT)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f'{self.project} {self.technology}'
+
 
 class ProjectInstrument(models.Model):
     instrument = models.ForeignKey(Instrument, on_delete=models.RESTRICT)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.project} {self.instrument}'

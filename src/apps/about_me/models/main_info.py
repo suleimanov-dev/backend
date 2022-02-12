@@ -22,6 +22,9 @@ class MainInfo(SingletonModel):
         null=True
     )
 
+    def __str__(self):
+        return 'Main info'
+
 
 class ContactLink(models.Model):
     name = models.CharField(max_length=64)
@@ -35,6 +38,9 @@ class ContactLink(models.Model):
 
     class Meta:
         ordering = ('-priority_number',)
+
+    def __str__(self):
+        return self.name
 
 
 class TechnologyBlock(models.Model):
@@ -51,3 +57,6 @@ class TechnologyBlock(models.Model):
 
     class Meta:
         ordering = ('-priority_number',)
+
+    def __str__(self):
+        return self.type
