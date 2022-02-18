@@ -24,7 +24,7 @@ class Project(models.Model):
     short_description = models.TextField(max_length=512)
     overview_video = models.FileField(
         upload_to='videos/overviews/',
-        validators=[FileExtensionValidator(['mp4'])],
+        validators=[FileExtensionValidator(['mov', 'mp4'])],
         max_length=256,
         blank=True,
         null=True
