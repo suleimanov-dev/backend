@@ -58,7 +58,7 @@ class ProjectArticle(models.Model):
     class Title(models.TextChoices):
         description = 'DESCRIPTION', 'Description'
         features = 'FEATURES', 'Features'
-        contribution = 'CONTRIBUTION', 'Contribution'
+        contribution = 'MY CONTRIBUTION', 'My contribution'
 
     title = models.CharField(max_length=64, choices=Title.choices)
     text = models.TextField(max_length=2048)
